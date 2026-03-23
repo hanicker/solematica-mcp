@@ -1,0 +1,18 @@
+{
+  "name": "@solematica/mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for Solematica — solar estimates, provider comparison, energy data",
+  "main": "index.js",
+  "bin": {
+    "solematica-mcp": "./index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "keywords": ["mcp", "solar", "photovoltaic", "energy", "italy", "solematica"],
+  "license": "MIT"
+}
