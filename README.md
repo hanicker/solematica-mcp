@@ -1,19 +1,28 @@
 # @solematica/mcp-server
 
-MCP (Model Context Protocol) server for Solematica — solar estimates, provider comparison and energy data for Italy.
+[![npm version](https://img.shields.io/npm/v/@solematica/mcp-server)](https://www.npmjs.com/package/@solematica/mcp-server)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+MCP (Model Context Protocol) server for [Solematica](https://www.solematica.it) — solar estimates, provider comparison and energy data for Italy.
+
+This server enables AI assistants like Claude to analyze solar potential, compare photovoltaic providers, check energy prices and search energy-related articles for the Italian market.
 
 ## Tools
 
-| Tool | Description | Auth required |
-|------|-------------|---------------|
-| `stima_solare` | Solar estimate for an Italian address (production, savings, ROI) | API key |
-| `info_tetto` | Satellite roof analysis (surface, orientation, segments) | No |
-| `confronta_provider` | Compare 11 Italian solar providers (prices, components, transparency) | No |
-| `dettaglio_provider` | Full provider detail (services, contacts, accessories) | No |
-| `prezzi_energia` | Current Italian energy prices (PUN/ARERA) | No |
-| `cerca_articoli` | Search blog articles by category/keyword | No |
+| Tool | Description | Auth |
+|------|-------------|------|
+| `stima_solare` | Generate a full solar estimate for an Italian address — production, savings, ROI, panel sizing | API key |
+| `info_tetto` | Satellite roof analysis via Google Solar API — surface, orientation, segments, panel potential | Free |
+| `confronta_provider` | Compare 11 Italian solar providers — prices, components, warranties, transparency index | Free |
+| `dettaglio_provider` | Full provider detail — accessories (heat pumps, EV chargers, boilers), contacts, financing | Free |
+| `prezzi_energia` | Current Italian energy prices (PUN/ARERA) with update date | Free |
+| `cerca_articoli` | Search Solematica blog articles by category or keyword | Free |
 
-## Usage with Claude Desktop
+## Quick Start
+
+### Claude Desktop
+
+Add to your `claude_desktop_config.json`:
 
 ```json
 {
@@ -29,9 +38,110 @@ MCP (Model Context Protocol) server for Solematica — solar estimates, provider
 }
 ```
 
-API key is only required for `stima_solare`. All other tools work without authentication.
+### Claude Code
+
+```bash
+claude mcp add solematica npx @solematica/mcp-server
+```
+
+### Other MCP Clients
+
+Any MCP-compatible client can use this server via stdio transport:
+
+```bash
+npx @solematica/mcp-server
+```
+
+## Authentication
+
+- **API key** is only required for `stima_solare` (consumes credits per estimate)
+- All other tools are **free and public** — no API key needed
+- Get an API key by registering as a partner at [solematica.it/partner](https://www.solematica.it/partner)
 
 ## Environment Variables
 
-- `SOLEMATICA_API_KEY` — API key for authenticated endpoints (get one at solematica.it/partner)
-- `SOLEMATICA_API_URL` — API base URL (default: `https://api.solematica.it/api/v1`)
+| Variable | Required | Default | Description |
+|----------|----------|---------|-------------|
+| `SOLEMATICA_API_KEY` | Only for `stima_solare` | — | Your API key for authenticated endpoints |
+| `SOLEMATICA_API_URL` | No | `https://api.solematica.it/api/v1` | API base URL (for self-hosted or testing) |
+
+## Tool Details
+
+### `stima_solare`
+
+Generates a complete solar estimate for an Italian address using Google Solar API + PVGIS data.
+
+**Input:**
+- `indirizzo` (required) — Full Italian address (e.g. "Via Roma 1, 20100 Milano MI")
+- `consumo_annuo_kwh` — Annual electricity consumption in kWh (default: 3500)
+- `tipo_abitazione` — Building type: `indipendente`, `bifamiliare`, `schiera`, `condominio`
+- `superficie_tetto_mq` — Roof surface in sqm (auto-calculated from satellite if omitted)
+- `orientamento` — Roof orientation: `nord`, `sud`, `est`, `ovest`
+
+**Returns:** kWp sizing, panel count, annual production, monthly distribution, savings, ROI, CO2 avoided, cost estimate.
+
+### `info_tetto`
+
+Analyzes a roof using Google Solar API satellite data.
+
+**Input:**
+- `lat` (required) — Latitude
+- `lng` (required) — Longitude
+
+**Returns:** Roof surface, usable area, orientation, roof segments, max panel count, sunshine hours.
+
+### `confronta_provider`
+
+Lists all active Italian solar providers with comparison data.
+
+**Returns:** Array of providers with name, price (3 kWp), panel brand, inverter brand, warranty, transparency index (1-3), and accessory services availability (heat pump, EV charger, boiler).
+
+### `dettaglio_provider`
+
+Full detail for a specific provider.
+
+**Input:**
+- `slug` (required) — Provider slug: `enel`, `iren`, `plenitude`, `otovo`, `eon`, `hera`, `a2a`, `edison`, `engie`, `sorgenia`, `bluenergy`
+
+**Returns:** All comparison data plus: description, phone, headquarters, founding year, financing details, accessory service details with URLs.
+
+### `prezzi_energia`
+
+Current Italian energy prices from the Solematica database, updated monthly.
+
+**Returns:** Self-consumption price (€/kWh), SSP price, cost per kWp range, battery cost per kWh, last update date.
+
+### `cerca_articoli`
+
+Search the Solematica blog for energy-related articles.
+
+**Input:**
+- `categoria` — Filter by category (e.g. `fotovoltaico`, `incentivi`, `risparmio`)
+- `limit` — Max results (default: 10, max: 50)
+
+**Returns:** Article list with title, slug, category, date, description, and full URL.
+
+## Examples
+
+Ask Claude:
+
+- *"Quanto produrrebbe un impianto fotovoltaico in Via Garibaldi 15, Torino?"*
+- *"Confronta le offerte fotovoltaico di Enel e Iren"*
+- *"Quali provider offrono anche la pompa di calore?"*
+- *"Qual è il prezzo corrente dell'energia in Italia?"*
+- *"Cerca articoli sugli incentivi fotovoltaico 2026"*
+
+## Links
+
+- [Solematica](https://www.solematica.it) — Main platform
+- [Provider Comparison](https://www.solematica.it/confronto-offerte) — Public comparison page
+- [API Documentation](https://www.solematica.it/sviluppatori) — REST API docs
+- [Blog](https://www.solematica.it/blog) — Energy articles
+
+## License
+
+MIT — see [LICENSE](LICENSE) file.
+
+## Author
+
+[Solematica](https://www.solematica.it) — Soloweb SRL

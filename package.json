@@ -1,7 +1,7 @@
 {
   "name": "@solematica/mcp-server",
-  "version": "1.0.0",
-  "description": "MCP server for Solematica — solar estimates, provider comparison, energy data",
+  "version": "1.0.1",
+  "description": "MCP server for Solematica — solar estimates, provider comparison, energy prices and blog for Italy",
   "main": "index.js",
   "bin": {
     "solematica-mcp": "./index.js"
@@ -13,6 +13,40 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0"
   },
-  "keywords": ["mcp", "solar", "photovoltaic", "energy", "italy", "solematica"],
-  "license": "MIT"
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "claude",
+    "ai",
+    "solar",
+    "photovoltaic",
+    "fotovoltaico",
+    "energy",
+    "italy",
+    "solematica",
+    "renewable-energy",
+    "solar-panels"
+  ],
+  "author": {
+    "name": "Solematica — Soloweb SRL",
+    "email": "info@solematica.it",
+    "url": "https://www.solematica.it"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/n3m1/solematica-mcp.git"
+  },
+  "homepage": "https://www.solematica.it/sviluppatori",
+  "bugs": {
+    "url": "https://github.com/n3m1/solematica-mcp/issues"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ]
 }
