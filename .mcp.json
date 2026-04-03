@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "solematica": {
+      "command": "npx",
+      "args": ["@solematica/mcp-server"],
+      "env": {
+        "SOLEMATICA_API_KEY": ""
+      }
+    }
+  }
+}
