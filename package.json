@@ -1,8 +1,9 @@
 {
   "name": "@solematica/mcp-server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "MCP server for Solematica — solar estimates, provider comparison, energy prices and blog for Italy",
   "main": "index.js",
+  "mcpName": "io.github.n3m1/solematica-mcp",
   "bin": {
     "solematica-mcp": "./index.js"
   },
@@ -15,17 +16,25 @@
   },
   "keywords": [
     "mcp",
+    "mcp-server",
     "model-context-protocol",
     "claude",
+    "cursor",
+    "windsurf",
     "ai",
     "solar",
     "photovoltaic",
     "fotovoltaico",
     "energy",
     "italy",
+    "italia",
     "solematica",
     "renewable-energy",
-    "solar-panels"
+    "solar-panels",
+    "solar-energy",
+    "green-energy",
+    "energia-solare",
+    "provider-comparison"
   ],
   "author": {
     "name": "Solematica — Soloweb SRL",
@@ -46,6 +55,7 @@
   },
   "files": [
     "index.js",
+    "server.json",
     "README.md",
     "LICENSE"
   ]
