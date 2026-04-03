@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "MCP server for Solematica — solar estimates, provider comparison, energy prices and blog for Italy",
   "main": "index.js",
-  "mcpName": "io.github.n3m1/solematica-mcp",
+  "mcpName": "io.github.hanicker/solematica-mcp",
   "bin": {
     "solematica-mcp": "./index.js"
   },
