@@ -43,11 +43,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/n3m1/solematica-mcp.git"
+    "url": "https://github.com/hanicker/solematica-mcp.git"
   },
   "homepage": "https://www.solematica.it/sviluppatori",
   "bugs": {
-    "url": "https://github.com/n3m1/solematica-mcp/issues"
+    "url": "https://github.com/hanicker/solematica-mcp/issues"
   },
   "license": "MIT",
   "engines": {

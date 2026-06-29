@@ -6,7 +6,7 @@
   "version": "1.0.2",
   "websiteUrl": "https://www.solematica.it/sviluppatori",
   "repository": {
-    "url": "https://github.com/n3m1/solematica-mcp",
+    "url": "https://github.com/hanicker/solematica-mcp",
     "source": "github"
   },
   "icons": [

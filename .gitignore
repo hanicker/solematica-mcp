@@ -1,2 +1,6 @@
 node_modules/
 SUBMIT_TO_DIRECTORIES.md
+
+# Registry publish tokens (secrets)
+.mcpregistry_github_token
+.mcpregistry_registry_token

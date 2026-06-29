@@ -1,4 +1,4 @@
-<!-- mcp-name: io.github.n3m1/solematica-mcp -->
+<!-- mcp-name: io.github.hanicker/solematica-mcp -->
 
 # @solematica/mcp-server
 
